@@ -1,0 +1,1031 @@
+/*
+ * Author       : vishnu.d.2024.cse_rajalak415
+ * Generated on : 10-Nov-2026 15:07:29
+ * Version      : 1.0
+ */
+ application "Event Registration System"
+ {
+ 	date format = "dd-MMM-yyyy"
+ 	time zone = "America/Los_Angeles"
+ 	time format = "24-hr"
+
+ 	forms
+	{
+		form event_registrations
+		{
+			displayname = "Event Registrations"
+			success message = "Event Registrations Added Successfully"
+			Section
+			(
+				type = section
+	 			row = 1
+	 			column = 0   
+				width = medium
+			)
+			participant_name
+			(
+    			type = name
+				displayname = "Participant Name"
+     			prefix
+     			(
+	     			 type = prefix
+	     			 displayname ="Prefix"
+	     			 visibility = false
+	     			 value = {"Mr.","Mrs.","Ms."}
+     			) 
+     			first_name
+     			(
+	     			 type = first_name
+	     			 displayname ="First Name"
+     			) 
+     			last_name
+     			(
+	     			 type = last_name
+	     			 displayname ="Last Name"
+	     			 visibility = false
+     			) 
+     			suffix
+     			(
+	     			 type = suffix
+	     			 displayname ="Suffix"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			email_address
+			(
+    			type = email
+				displayname = "Email Address"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			institution_address
+			(
+    			type = address
+				displayname = "Institution Address"
+     			capture_coordinates = true
+     			adjust_using_map = false
+     			address_line_1
+     			(
+	     			  type = address_line_1
+	     			  displayname = "Address Line 1"
+     			) 
+     			address_line_2
+     			(
+	     			  type = address_line_2
+	     			  displayname = "Address Line 2"
+	     			 visibility = false
+     			) 
+     			district_city
+     			(
+	     			  type = district_city
+	     			  displayname = "City / District"
+	     			 visibility = false
+     			) 
+     			state_province
+     			(
+	     			  type = state_province
+	     			  displayname = "State / Province"
+	     			 visibility = false
+     			) 
+     			postal_Code
+     			(
+	     			  type = postal_Code
+	     			  displayname = "Postal Code"
+	     			 visibility = false
+     			) 
+     			country
+     			(
+	     			  type = country
+	     			  displayname = "Country"
+	     			 visibility = false
+     			) 
+     			latitude
+     			(
+	     			  type = latitude
+	     			  displayname = "Latitude"
+	     			 visibility = false
+     			) 
+     			longitude
+     			(
+	     			  type = longitude
+	     			  displayname = "Longitude"
+	     			 visibility = false
+     			) 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			contact_number
+			(
+    			type = phonenumber
+				displayname = "Contact Number"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			college_organization_name
+			(
+    			type = text
+				displayname = "College Organization Name"
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			expectations_from_event
+			(
+    			type = textarea
+				displayname = "Expectations From Event"
+				height = 100px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			team_size
+			(
+				type = number
+				displayname = "Team Size"
+				maxchar = 19
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			preferred_session_date
+			(
+    			type = date
+				displayname = "Preferred Session Date"
+				alloweddays = 0,1,2,3,4,5,6
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			preferred_session_slot
+			(
+    			type = time
+				displayname = "Preferred Session Slot"
+				timedisplayoptions = "hh:mm:ss" 
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			event_track
+			(
+				type = picklist
+				displayname = "Event Track"
+				values = {"AI & Data Science","Cloud Computing","Cybersecurity","Robotics & Automation","Web Development"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			participant_type
+			(
+				type = picklist
+				displayname = "Participant Type"
+				values = {"Faculty","Professional","Student"}
+				others option = true
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			areas_of_interest
+			(
+				type = list	
+				displayname = "Areas Of Interest"
+				values = {"Generative AI","Cloud Computing","Cybersecurity","Machine Learning","Web Development","Robotics"}
+				height = 13px
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+			agree_to_code_of_conduct
+			(
+    			type = checkbox
+				displayname = "Agree To Code Of Conduct"
+				initial value = false
+	 			row = 1
+	 			column = 1   
+				width = medium
+			)
+	
+			actions
+			{
+				on add
+				{
+					submit
+					(
+   						type = submit
+   						displayname = "Submit"
+					)
+					reset
+					(
+   						type = reset
+   						displayname = "Reset"
+					)
+				}
+				on edit
+				{
+					update
+					(
+   						type = submit
+   						displayname = "Update"
+					)
+					cancel
+					(
+   						type = cancel
+   						displayname = "Cancel"
+					)
+				}
+			}
+			blueprint components
+			{
+				stages = {"Registration Submitted","Pending Review","Approved","Rejected","Pending Clarification","Registration Confirmed","Event Completed","Cancelled","Registration Closed"}
+			}
+		}
+	}
+	reports
+	{
+		list event_registrations_Report
+		{
+			displayName = "All Event Registrations"
+			show all rows from event_registrations    
+			(
+				participant_name  as "Participant Name"
+				institution_address  as "Institution Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				email_address as "Email Address"
+				contact_number as "Contact Number"
+				college_organization_name as "College Organization Name"
+				expectations_from_event as "Expectations From Event"
+				team_size as "Team Size"
+				preferred_session_date as "Preferred Session Date"
+				preferred_session_slot as "Preferred Session Slot"
+				event_track as "Event Track"
+				participant_type as "Participant Type"
+				areas_of_interest as "Areas Of Interest"
+				agree_to_code_of_conduct as "Agree To Code Of Conduct"
+			)
+			conditional formatting
+			(
+				"New Formatting1"
+				{
+				condition = (event_track == "Cloud Computing")
+				fields = [event_track]
+				format = "color:#ffffff;background-color:#765f89;"
+				}
+				"New Formatting2"
+				{
+				condition = (event_track == "Robotics & Automation")
+				fields = [event_track]
+				format = "color:#000000;background-color:#1bbc9b;"
+				}
+			)
+		}
+		kanban event_registrations_by_event_track
+		{
+			displayName = "Event Tracks"
+			show all rows from event_registrations    
+			(
+				participant_name  as "Participant Name"
+				institution_address  as "Institution Address"
+	 			(
+	      			enable = Link_to_Map,Show_As_Text
+	 			)
+				email_address as "Email Address"
+				contact_number as "Contact Number"
+				college_organization_name as "College Organization Name"
+				expectations_from_event as "Expectations From Event"
+				team_size as "Team Size"
+				preferred_session_date as "Preferred Session Date"
+				preferred_session_slot as "Preferred Session Slot"
+				event_track as "Event Track"
+				participant_type as "Participant Type"
+				areas_of_interest as "Areas Of Interest"
+				agree_to_code_of_conduct as "Agree To Code Of Conduct"
+			)
+			options
+			(
+	 			display field = event_track
+	 		)
+		}
+	}
+	pages
+	{
+		page DashBoard
+		{
+			displayname = "Dashboard"
+			Content="<zml    \t\t\n\t\t\n\t\t\n\t\t\n\t\t\n>\n\t<layout>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<search \n\telementName='Search'\n\tpaddingTop = '0px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '0px'\n\tpaddingBottom = '0px'\n\tbgtype = 'none'\n\tbgColor = 'transparent'\n\n\tshape = 'flat'\n\tresultComponent = 'report'\n\tlinkName = 'event_registrations_Report'\n\ttarget = 'new-window'\n\tcriteriaString = 'participant_name.contains(input.searchString)'\n\tfontFamily = 'default'\n\tappLinkName = 'thisapp'\n\tstyle = '4'\n\tplaceholder = 'Enter Participant Name'\n\n>\n<searchbar color=\"#000000\" bgColor=\"#ffffff\" fontSize=\"15px\"\n/><searchbutton color=\"#ffffff\" bgColor=\"theme\" \nfontSize=\"15px\"  /></search>\n</column>\n</row><row>\n\t<column\n   \t\t width='20%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 1'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '70%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '10px'\n\tpaddingBottom = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Total Faculties'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = 'theme'\n\tsize = '32px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = '#FFFFFF'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'participant_type == &quot;Faculty&quot;'\n\t  value = 'thisapp.event_registrations.participant_type.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '30%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n\tcolor = '#FFFFFF'\n\tbgColor = 'theme'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'business-hierarchy-53'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 2'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '70%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '10px'\n\tpaddingBottom = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Count of Professional'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = 'theme'\n\tsize = '32px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = '#FFFFFF'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'participant_type == &quot;Professional&quot;'\n\t  value = 'thisapp.event_registrations.participant_type.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '30%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n\tcolor = '#FFFFFF'\n\tbgColor = 'theme'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'sport-cardio'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 3'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '70%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '10px'\n\tpaddingBottom = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Total Students'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = 'theme'\n\tsize = '32px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = '#FFFFFF'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t\tcriteria = 'participant_type == &quot;Student&quot;'\n\t  value = 'thisapp.event_registrations.participant_type.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '30%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n\tcolor = '#FFFFFF'\n\tbgColor = 'theme'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'users-2-wc'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<panel elementName='Panel 4'\n \n >\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpadding = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '70%'\n\t\thAlign = 'left'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '20px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '10px'\n\tpaddingBottom = '10px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginLeft = '0px'\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = '#909090'\n\tsize = '14px'\n\ttype = 'Text'\n\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\n\n\n\n\n\t  value = 'Total Event Registrations'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr><pr \n\t\t\twidth='fill'\n\t\theight='fill'\n>\n\t<pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '20px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '10px'\n\tbgColor = '#FFFFFF'\n\n\t\twidth = '100%'\n\t\thAlign = 'left'\n\t\tvAlign = 'top'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<text \n\n\tmarginRight = '0px' \n\tmarginBottom = '0px'\n\tmarginTop = '0px'\n\tcolor = 'theme'\n\tsize = '32px'\n\tbold = 'true' \n\ttype = 'Form Data'\n\n\tbgColor = '#FFFFFF'\n\n\n\tdisplayType = 'actual'\n\tthousandsSeperator = 'LOCALE'\n\tdecimalSeperator = 'DOT'\n\tnumberScale = 'none'\n\n\n\n\n\t  value = 'thisapp.event_registrations.participant_type.count'\n>\n</text>\n\n</pc>\n</pr>\n</pc>\n</pr>\n</pc><pc \n\t\tpaddingTop = '0px'\n\tpaddingLeft = '0px'\n\tpaddingRight = '20px'\n\tpaddingBottom = '0px'\n\tbgColor = 'rgba(0, 0, 0, 0)'\n\n\t\twidth = '30%'\n\t\thAlign = 'right'\n\t\tvAlign = 'middle'\n>\n\t<pr \n\t\t\twidth='auto'\n\t\theight='auto'\n>\n\t<pc \n\t\n>\n\t<image  \n\t\n\tcolor = '#FFFFFF'\n\tbgColor = 'theme'\n\twidth = '40px'\n\theight = '40px'\n\ttype = 'icon'\n\tvalue = 'location-appointment'\n\tsize = '22px'\n\tcornerRadius = '20px'\n\ticonType = 'outline'\n/>\n</pc>\n</pr>\n</pc>\n</pr>\n</pc>\n</pr>\n</panel>\n</column>\n</row>\n</column>\n</row>\n</column><column\n   \t\t width='80%'\n   \t>\n\t<chart \n\telementName='Chart 1'\n\n\t\n\ttitle = 'Distribution by Event Track'\n\t\n\t\ttitleSize = '16px'\n\ttype = 'Bar'\n\txtitle = 'Event Track'\n\tytitle = 'Count of Event Track'\n\tbgColor = 'rgb(255, 255, 255)'\n\ttheme = 'theme'\n\tlegendPos = 'none'\n\theightType = 'auto'\n\theightValue = '300px'\n\tappLinkName = 'thisapp'\n\tformLinkName = 'event_registrations'\n\txfield = 'event_track'\n\tyfields = 'count:event_track'\n\tgroupBy = 'participant_name'\n\t\tDelugeCriteria = 'event_track is not null &amp;&amp; event_track != &quot;&quot;'\n/>\n\n</column>\n</row><row>\n\t<column\n   \t\t width='100%'\n   \t>\n\t<report \n\telementName='Report'\n\n\t\tappLinkName = 'thisapp'\n\t\tlinkName = 'event_registrations_Report'\n\t\n\t\tiszreport = 'false'\n\t\t\t\t\tzc_Footer = 'false'\n\t\t\t\t\tzc_AddRec = 'false'\n\t\t\t\t\tzc_EditRec = 'false'\n\t\t\t\t\tzc_Print = 'false'\n\t\t\t\t\tzc_Export = 'false'\n\t\t\t\t\tzc_DelRec = 'false'\n\t\t\t\t\tzc_DuplRec = 'false'\n\t\t\t\t\tzc_Search = 'false'\n\t\t\t\t\tzc_EditBulkRec = 'false'\n\t\t\t\t\tzc_BulkDelete = 'false'\n\t\t\t\t\tzc_BulkDuplicate = 'false'\n\theightType = 'auto'\n\theightValue = '700'\n/>\n</column>\n</row>\n</layout>\n</zml>"
+		}
+	}
+
+
+
+
+		workflow
+		{
+		form
+		{
+			auto_fill_participant_email as "Auto-fill Participant Email"
+			{
+				type =  form
+				form = event_registrations
+
+				record event = on add
+
+				on load
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Auto-fill the email_address field with the logged-in user's email
+										input.email_address = zoho.loginuserid;
+										// Disable the email_address field to prevent editing
+										disable email_address;
+						)
+					}
+				}
+
+			}
+			validate_code_of_conduct as "Validate Code of Conduct"
+			{
+				type =  form
+				form = event_registrations
+
+				record event = on add or edit
+
+				on validate
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Check if agree_to_code_of_conduct checkbox is not checked
+										if(input.agree_to_code_of_conduct == false)
+										{
+											// Display error message to user
+											alert "You must agree to the code of conduct to proceed with registration";
+											// Cancel the form submission
+											cancel submit;
+										}
+						)
+					}
+				}
+
+			}
+			send_registration_confirmation as "Send Registration Confirmation"
+			{
+				type =  form
+				form = event_registrations
+
+				record event = on add
+
+				on success
+				{
+					actions 
+					{
+						custom deluge script
+						(
+											// Send email confirmation to participant upon successful registration
+										if(input.email_address.isNull())
+										{
+											info "Email address is required for confirmation";
+										}
+										else
+										{
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :input.email_address
+												subject :"Event Registration Confirmation"
+												message :"Dear " + input.participant_name.first_name + ",\n\nThank you for registering for the event. Your registration has been successfully completed.\n\nWe look forward to seeing you there!\n\nBest regards,\nEvent Registration Team"
+											]
+										}
+						)
+					}
+				}
+
+			}
+		}
+
+		schedule
+		{
+			session_date_reminder as "Session Date Reminder"
+			{
+				type =  schedule
+				form = event_registrations
+					status = inactive
+				start = preferred_session_date at "10:00:00"
+				time zone = "Asia/Kolkata"
+				on start
+				{
+					actions 
+					{
+					on load
+					(
+						// Fetch the preferred session date from input
+										preferredDate = input.preferred_session_date;
+										// Calculate the reminder date (one day before preferred session date)
+										reminderDate = preferredDate.addDay(-1);
+										// Get the current date
+										currentDate = zoho.currentdate;
+										// Check if today is the reminder date
+										if(currentDate == reminderDate)
+										{
+											// Prepare email details
+											recipientEmail = input.email_address;
+											participantName = input.participant_name.first_name;
+											eventName = "Event Registration";
+											sessionDate = preferredDate.getDateTime();
+											// Send reminder email
+											sendmail
+											[
+												from :zoho.loginuserid
+												to :recipientEmail
+												subject :"Reminder: Your Session is Tomorrow"
+												message :"Dear " + participantName + ",\n\nThis is a reminder that your session for " + eventName + " is scheduled for " + sessionDate + ".\n\nWe look forward to seeing you there!\n\nBest regards,\nEvent Team"
+											]
+										}
+					)
+					}
+				}
+			}
+		}
+
+
+		blueprint
+		{
+    			event_registration_review as "Event Registration Review"
+    			{
+        			type = Blueprint
+        			form = event_registrations
+        			start
+        			{
+        			}
+        			stages
+        			{
+           			"Registration Submitted"
+           			{
+           			}
+           			"Pending Review"
+           			{
+           			}
+           			"Approved"
+           			{
+           			}
+           			"Rejected"
+           			{
+           			}
+           			"Pending Clarification"
+           			{
+           			}
+           			"Registration Confirmed"
+           			{
+           			}
+           			"Event Completed"
+           			{
+           			}
+           			"Cancelled"
+           			{
+           			}
+           			"Registration Closed"
+           			{
+           			}
+        			}
+        			transitions
+        			{
+        			}
+    			}
+		}
+
+
+	}
+	share_settings
+	{
+			"Read"
+			{
+				name = "Read"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have read permission for all components\n"
+			}
+			"Write"
+			{
+				name = "Write"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have write permission for all components\n"
+			}
+			"Administrator"
+			{
+				name = "Administrator"
+				type = Users_Permissions
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This profile will have all the permissions.\n"
+			}
+			"Compliance Officer"
+			{
+				name = "Compliance Officer"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Verify that all participants have agreed to the code of conduct before finalizing their registration \n"
+				ModulePermissions
+				{
+					event_registrations
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							event_registrations_Report={"View","Edit","Delete"}
+							event_registrations_by_event_track={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Developer"
+			{
+				name = "Developer"
+				type = Developer
+				permissions = {Chat:false, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Developer Profile\n"
+			}
+			"Data Analyst"
+			{
+				name = "Data Analyst"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Monitor the dashboard KPIs to track real-time registration numbers and team sizes \n"
+				ModulePermissions
+				{
+					event_registrations
+					{
+						enabled= Viewall,Export 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							event_registrations_Report={"View"}
+							event_registrations_by_event_track={"View"}
+						}
+					}
+				}
+			}
+			"Symposium Administrator"
+			{
+				name = "Symposium Administrator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Oversee the entire registration lifecycle and manage user access to the application \n"
+				ModulePermissions
+				{
+					event_registrations
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							event_registrations_Report={"View","Edit","Delete"}
+							event_registrations_by_event_track={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Session Coordinator"
+			{
+				name = "Session Coordinator"
+				type = Users_Permissions
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Review participant preferences to assign attendees to specific AI, Web, or Cybersecurity tracks \n"
+				ModulePermissions
+				{
+					event_registrations
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							event_registrations_Report={"View","Edit","Delete"}
+							event_registrations_by_event_track={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Student Participant"
+			{
+				name = "Student Participant"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Submit registration details including institution address and preferred session dates \n"
+				ModulePermissions
+				{
+					event_registrations
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							event_registrations_Report={"View","Edit","Delete"}
+							event_registrations_by_event_track={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			"Customer"
+			{
+				name = "Customer"
+				type = Customer_Portal
+				permissions = {Chat:true, Predefined:true, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "This is the default profile having only add and view permission.\n"
+			}
+			"Faculty or Professional"
+			{
+				name = "Faculty or Professional"
+				type = Customer_Portal
+				permissions = {Chat:false, Predefined:false, ApiAccess:true, PIIAccess:true, ePHIAccess:true}
+				description = "Register as a team member or individual with specific professional expectations from the event \n"
+				ModulePermissions
+				{
+					event_registrations
+					{
+						enabled= Create,Viewall,Modifyall,Import,Export,Tab 
+						allFieldsVisible= true 
+						ReportPermissions
+						{
+							event_registrations_Report={"View","Edit","Delete"}
+							event_registrations_by_event_track={"View","Edit","Delete"}
+						}
+					}
+				}
+			}
+			roles
+			{
+				"CEO"
+				{
+					description = "User belonging to this role can access data of all other users."
+				}
+			}
+	}
+
+	customize
+	{
+		icon
+		{
+			text = "ERS"
+			background color = "#F8670D"
+			foreground color = "#FFFFFF"
+		}
+	}
+
+	web
+	{
+		forms
+		{
+			form event_registrations
+			{
+				label placement = left
+			}
+		}
+		reports
+		{
+			report event_registrations_Report
+			{
+				quickview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								participant_name as "Participant Name"
+								email_address as "Email Address"
+								institution_address as "Institution Address"
+								contact_number as "Contact Number"
+								college_organization_name as "College Organization Name"
+								expectations_from_event as "Expectations From Event"
+								team_size as "Team Size"
+								preferred_session_date as "Preferred Session Date"
+								preferred_session_slot as "Preferred Session Slot"
+								event_track as "Event Track"
+								participant_type as "Participant Type"
+								areas_of_interest as "Areas Of Interest"
+								agree_to_code_of_conduct as "Agree To Code Of Conduct"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+		     				title = "Overview"
+							fields
+							(
+								participant_name as "Participant Name"
+								email_address as "Email Address"
+								institution_address as "Institution Address"
+								contact_number as "Contact Number"
+								college_organization_name as "College Organization Name"
+								expectations_from_event as "Expectations From Event"
+								team_size as "Team Size"
+								preferred_session_date as "Preferred Session Date"
+								preferred_session_slot as "Preferred Session Slot"
+								event_track as "Event Track"
+								participant_type as "Participant Type"
+								areas_of_interest as "Areas Of Interest"
+								agree_to_code_of_conduct as "Agree To Code Of Conduct"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+			report event_registrations_by_event_track
+			{
+				quickview
+				(
+					layout
+					(
+		 				type = 1
+						datablock1
+						(
+							layout type = 1
+							fields
+							(
+								participant_name as "Participant Name"
+								college_organization_name as "College Organization Name"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+								Add 
+								Import 
+								Export 
+							)
+						record
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+    					)
+						)
+    				action
+    				(
+						on click
+						(
+							View Record   	   
+    					)
+						on right click
+						(
+							Edit   	   
+							Duplicate   	   
+							Delete   	   
+							Print   	   
+							View Record   	   
+    					)
+     				)
+				)
+
+				detailview
+				(
+					layout
+					(
+						datablock1
+						(
+							fields
+							(
+								participant_name as "Participant Name"
+								email_address as "Email Address"
+								institution_address as "Institution Address"
+								contact_number as "Contact Number"
+								college_organization_name as "College Organization Name"
+								expectations_from_event as "Expectations From Event"
+								team_size as "Team Size"
+								preferred_session_date as "Preferred Session Date"
+								preferred_session_slot as "Preferred Session Slot"
+								event_track as "Event Track"
+								participant_type as "Participant Type"
+								areas_of_interest as "Areas Of Interest"
+								agree_to_code_of_conduct as "Agree To Code Of Conduct"
+							)
+						)
+					)
+						menu
+						(
+							header
+							(
+								Edit 
+								Duplicate 
+								Delete 
+								Print 
+							)
+						)
+				)
+			}
+		}
+		menu
+		{
+			space Space
+			{
+				displayname = "Space"
+				icon = "objects-spaceship"
+
+				section Section_1
+				{
+					displayname = "Dashboard"
+					icon = "ui-1-dashboard-half"
+					page DashBoard
+					{
+						icon = "ui-1-dashboard-half"
+					}
+				}
+				section Section_2
+				{
+					displayname = "Event Registrations"
+					icon = "travel-world"
+					form  event_registrations
+					{
+						icon = "ui-1-bold-add"
+					}
+					report event_registrations_Report
+					{
+						icon = "travel-world"
+					}
+				}
+				section Section_3
+				{
+					displayname = "Event Tracks"
+					icon = "transportation-train"
+					report event_registrations_by_event_track
+					{
+						icon = "transportation-train"
+					}
+				}
+				section ZC_App_Preferences
+				{
+					displayname = "App Preferences"
+					icon = "design-app"
+					systemcomponent
+					{
+						type = localization
+						displayname = "Language Selection"
+						icon = "education-language"
+					}
+					systemcomponent
+					{
+						type = connection
+						displayname = "Integrations"
+						icon = "tech-2-connection"
+					}
+				}
+				section ZC_Approvals
+				{
+					displayname = "Approvals"
+					icon = "ui-2-hourglass"
+					systemcomponent
+					{
+						type = approval
+						approval status = pending
+						displayname = "Pending Tasks"
+						icon = "ui-2-hourglass"
+					}
+					systemcomponent
+					{
+						type = approval
+						approval status = completed
+						displayname = "Completed Tasks"
+						icon = "design-todo"
+					}
+				}
+				section SharedAnalytics_Section
+				{
+					type = shared_user_report_section
+					displayname = "Reports"
+					icon = "business-chart-bar-33"
+				}
+			}
+			preference
+			{
+				icon
+				{
+					style = solid
+					show = {space,section,component}
+				}
+			}
+		}
+		customize
+		{
+			font = "lato"
+			color options
+			{
+				name = "custom_color_1"
+				brand color = "#f8670d"
+				navigation background color = "#ffffff"
+				type = "custom"
+			}
+			logo
+			{
+				preference = "none"
+				placement = "left"
+			}
+		}
+	}
+	phone
+	{
+		customize
+		{
+			layout = twocolumn
+			font = "default"
+			style = "3"
+			color options
+			{
+				type = "custom"
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	tablet
+	{
+		customize
+		{
+			layout = slidingpane
+			font = "default"
+			style = "3"
+			color options
+			{
+				type = "custom"
+			}
+			logo
+			{
+				preference = "none"
+			}
+		}
+	}
+	translation
+{
+{"Language_Settings":{"LANGAGUE_WITH_LOGIN":"browser"}}
+}
+}
